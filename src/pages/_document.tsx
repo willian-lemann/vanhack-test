@@ -9,7 +9,7 @@ class MyDocument extends Document {
    render() {
       return (
          <Html lang="pt">
-            <title>Bethree-template</title>
+            <title>VanHack Test</title>
             <Head></Head>
             <body>
                <Main />

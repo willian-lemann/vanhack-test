@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }) => {
          <Head>
             <meta charSet="utf-8" />
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            <meta property="og:title" content="Bethree-template" key="title" />
+            <meta property="og:title" content="vanhack-test" key="title" />
          </Head>
          <Provider>
             <Component {...pageProps} />
