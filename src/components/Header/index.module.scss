@@ -5,6 +5,7 @@
    flex-direction: column;
    justify-content: space-between;
    align-items: flex-start;
+   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
 
    .header__title__section {
       height: 72px;
@@ -116,6 +117,55 @@
       .active {
          color: #0675ce;
          border-bottom: 3px solid #0675ce;
+      }
+   }
+}
+
+.header__popover__overlay {
+   height: 312px;
+   width: 347px;
+}
+
+.header__popover {
+   height: 270px;
+   width: 100%;
+   border-radius: 9px;
+
+   section {
+      padding: 10px;
+      display: flex;
+      justify-content: flex-start;
+
+      img {
+         height: 20px;
+         width: 20px;
+      }
+
+      span {
+         margin-left: 10px;
+      }
+
+      &:nth-child(5) {
+         ul {
+            height: 100px;
+            width: 100%;
+            display: flex; 
+            flex-wrap: wrap;
+
+            li {
+               list-style: none;
+               margin-left: 10px;
+               height: 30px;
+               padding: 5px;
+               font-size: 14px;
+               font-weight: 400;
+               border-radius: 3px;
+               background-color: #f2f2f2;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+            }
+         }
       }
    }
 }

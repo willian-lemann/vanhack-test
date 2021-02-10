@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 
 import styles from './index.module.scss';
 
-import { FiInfo } from 'react-icons/fi';
-import { useState } from 'react';
+import { FaInfoCircle, FaRegBuilding, FaUser, FaDollarSign, FaCode, FaMapMarkerAlt } from 'react-icons/fa';
+import { Popover } from 'antd';
 
 interface HeaderProps {
    title?: string;
@@ -17,7 +17,43 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
          <section className={styles.header__title__section}>
             <div className={styles.header__title__container}>
                <span>{title}</span>
-               <FiInfo size={20} />
+               <Popover
+                  placement="rightTop"
+                  trigger="click"
+                  overlayClassName={styles.header__popover__overlay}
+                  content={() => (
+                     <div className={styles.header__popover}>
+                        <section>
+                           <FaRegBuilding size={20} />
+                           <span> Driftwood sidecorp </span>
+                        </section>
+                        <section>
+                           <FaUser size={20} />
+                           <span> 1 Position </span>
+                        </section>
+                        <section>
+                           <FaDollarSign size={20} />
+                           <span> $CAD 100 - 140k </span>
+                        </section>
+                        <section>
+                           <FaMapMarkerAlt size={20} />
+                           <span> Remote </span>
+                        </section>
+                        <section>
+                           <FaCode size={20} />
+                           <ul>
+                              <li>Machine Learning</li>
+                              <li>Signal R</li>
+                              <li>Dapper</li>
+                              <li>Dapper</li>
+                              <li>Dapper</li>
+                           </ul>
+                        </section>
+                     </div>
+                  )}
+               >
+                  <FaInfoCircle size={20} />
+               </Popover>
             </div>
 
             <div className={styles.header__actions}>
