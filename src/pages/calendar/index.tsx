@@ -1,11 +1,5 @@
-import Home from '..';
-
 const Calendar: React.FC = () => {
-   return (
-      <Home>
-         <main>test</main>
-      </Home>
-   );
+   return <main>Calendar</main>;
 };
 
 export default Calendar;

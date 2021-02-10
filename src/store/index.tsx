@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { UIProvider } from './ui';
+import { NavigationProvider } from './navigation/NavigationProvider';
 
 const Provider: React.FC = ({ children }) => {
-   return <UIProvider>{children}</UIProvider>;
+   return <NavigationProvider>{children}</NavigationProvider>;
 };
 
 export default Provider;

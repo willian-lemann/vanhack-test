@@ -1,11 +1,5 @@
-import Home from '..';
-
 const Interview: React.FC = () => {
-   return (
-      <Home>
-         <main>test</main>
-      </Home>
-   );
+   return <main>Interview</main>;
 };
 
 export default Interview;
