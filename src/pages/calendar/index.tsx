@@ -1,5 +1,29 @@
-const Calendar: React.FC = () => {
-   return <main>Calendar</main>;
+import React, { useEffect, useState } from 'react';
+import api from '../../config/axiosConfig';
+
+import styles from './index.module.scss';
+
+import { groupBy } from 'lodash';
+import CalendarList from '../../components/CalendarList';
+import useFetch from '../../hooks/useFetch';
+
+const Calendar = () => {
+   const { data } = useFetch(`${process.env.NEXT_PUBLIC_API_URL}/Calendar`);
+
+   const calendarsGroupedByStatus = Object.entries(groupBy(data, 'status'));
+
+   const calendars = calendarsGroupedByStatus.map((calendar) => {
+      return {
+         title: calendar[0] === 'Scheduled' ? 'UpComing' : calendar[0],
+         data: calendar[1],
+      };
+   });
+
+   return (
+      <main className={styles.calendar}>
+         <CalendarList calendarList={calendars} />
+      </main>
+   );
 };
 
 export default Calendar;
