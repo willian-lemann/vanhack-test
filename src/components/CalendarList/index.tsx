@@ -20,25 +20,26 @@ interface CalendarListProps {
    }>;
 }
 
-const CalendarList: React.FC<CalendarListProps> = ({ calendarList }) => {
-   return (
-      <ul className={styles.calendar__list}>
-         <header className={styles.calendar__list__header}>
-            <ul>
-               <li>Candidate</li>
+class CalendarList extends React.Component<CalendarListProps> {
+   render() {
+      return (
+         <ul className={styles.calendar__list}>
+            <header className={styles.calendar__list__header}>
+               <ul>
+                  <li>Candidate</li>
 
-               <li>Interview Step</li>
+                  <li>Interview Step</li>
 
-               <li>Scheduled time</li>
-            </ul>
-             
-         </header>
+                  <li>Scheduled time</li>
+               </ul>
+            </header>
 
-         {calendarList.map((calendar) => (
-            <CalendarItem data={calendar} />
-         ))}
-      </ul>
-   );
-};
+            {this.props.calendarList.map((calendar) => (
+               <CalendarItem data={calendar} />
+            ))}
+         </ul>
+      );
+   }
+}
 
 export default CalendarList;

@@ -7,7 +7,7 @@ import { groupBy } from 'lodash';
 import CalendarList from '../../components/CalendarList';
 import useFetch from '../../hooks/useFetch';
 
-const Calendar = () => {
+const Calendar: React.FC = () => {
    const { data } = useFetch('/Calendar');
 
    const calendarsGroupedByStatus = Object.entries(groupBy(data, 'status'));
@@ -19,6 +19,7 @@ const Calendar = () => {
       };
    });
 
+   console.log(calendars);
    return (
       <main className={styles.calendar}>
          <CalendarList calendarList={calendars} />
