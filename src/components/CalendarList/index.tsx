@@ -24,10 +24,16 @@ const CalendarList: React.FC<CalendarListProps> = ({ calendarList }) => {
    return (
       <ul className={styles.calendar__list}>
          <header className={styles.calendar__list__header}>
-            <h3>Candidate</h3>
-            <h3>Interview Step</h3>
-            <h3>Scheduled time</h3>
+            <ul>
+               <li>Candidate</li>
+
+               <li>Interview Step</li>
+
+               <li>Scheduled time</li>
+            </ul>
+             
          </header>
+
          {calendarList.map((calendar) => (
             <CalendarItem data={calendar} />
          ))}

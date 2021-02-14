@@ -28,7 +28,7 @@ const CalendarItem: React.FC<CalendarItemProps> = ({ data: { title, data } }) =>
    };
 
    return (
-      <li className={styles.calendar__item}> 
+      <li className={styles.calendar__item}>
          <header>{title}</header>
          <ul>
             {data.map((item) => (
@@ -45,23 +45,24 @@ const CalendarItem: React.FC<CalendarItemProps> = ({ data: { title, data } }) =>
                      <span>{item.interviewStep}</span>
                   </div>
 
-                  <div className={styles.candidate__schedule}>
-                     {item.status !== 'Waiting Confirmation' ? (
+                  {item.status !== 'Waiting Confirmation' ? (
+                     <div className={styles.candidate__schedule}>
                         <span>{GetFormattedData(item.scheduledTime)}</span>
-                     ) : (
+                     </div>
+                  ) : (
+                     <div className={styles.candidate__waiting__confirmation}>
                         <span className={styles.waiting__confirmation}>{item.status}</span>
-                     )}
-                  </div>
+                     </div>
+                  )}
 
                   <div className={styles.interview__link}>
                      {item.status !== 'Waiting Confirmation' && (
                         <a className={styles.get__interview__link}>Get interview link</a>
                      )}
                   </div>
-
-                  <div className={styles.actions}>
+ 
                      <FaEllipsisV size={20} color="#58636D" />
-                  </div>
+                   
                </li>
             ))}
          </ul>

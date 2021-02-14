@@ -1,14 +1,11 @@
 .calendar__item {
    list-style: none;
    background-color: #f7f7f7;
-   margin-top: 30px;
-   width: 100%;
-   margin-bottom: 30px;
+   margin: 30px;
 
    header {
       font-size: 14px;
       font-weight: bold;
-      margin-left: 56px;
       margin-bottom: 20px;
 
       &:first-child {
@@ -30,7 +27,7 @@
          list-style: none;
          height: 100%;
          width: 100%;
-         max-width: 100%;
+
          display: flex;
          justify-content: space-between;
          align-items: center;
@@ -38,7 +35,6 @@
          .candidate__info__container {
             height: 100%;
             width: 220px;
-            margin-left: 56px;
 
             display: flex;
             justify-content: center;
@@ -76,13 +72,14 @@
             align-items: center;
          }
 
-         .candidate__schedule {
+         .candidate__waiting__confirmation {
             height: 100%;
             min-width: 151px;
             max-width: 151px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            margin-right: 130px;
 
             .waiting__confirmation {
                max-width: 151px;
@@ -94,6 +91,15 @@
                font-weight: 400;
                text-align: center;
             }
+         }
+
+         .candidate__schedule {
+            height: 100%;
+            min-width: 151px;
+            max-width: 151px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
          }
 
          .interview__link {
@@ -111,10 +117,6 @@
                padding: 1px 14px;
                border-radius: 3px;
             }
-         }
-
-         .actions {
-            margin-right: 40px;
          }
 
          img {
