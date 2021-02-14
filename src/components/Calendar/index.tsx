@@ -8,7 +8,7 @@ import CalendarList from '../../components/CalendarList';
 import useFetch from '../../hooks/useFetch';
 
 const Calendar = () => {
-   const { data } = useFetch(`${process.env.NEXT_PUBLIC_API_URL}/Calendar`);
+   const { data } = useFetch('/Calendar');
 
    const calendarsGroupedByStatus = Object.entries(groupBy(data, 'status'));
 

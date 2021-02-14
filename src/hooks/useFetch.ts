@@ -1,11 +1,10 @@
 import useSwr from 'swr';
+import api from '../config/axiosConfig';
 
-const useFetch = (url: string) => {
-   const { data, error } = useSwr(url, async (url) => {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      return data;
+const useFetch = (resource: string) => {
+   const { data, error } = useSwr(resource, async (resource) => {
+      const response = await api.get(resource);
+      return response.data;
    });
 
    return {

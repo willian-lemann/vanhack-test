@@ -1,10 +1,10 @@
 import styles from '../styles/home.module.scss';
 import Header from '../components/Header';
 import useNavigation from '../hooks/useNavigation';
-import Calendar from './calendar';
-import Interview from './interview';
+import Calendar from '../components/Calendar';
+import Interview from '../components/Interview';
 
-const Home: React.FC = ({ children }) => {
+const Home: React.FC = () => {
    const {
       navigation: { calendar, interview },
    } = useNavigation();
