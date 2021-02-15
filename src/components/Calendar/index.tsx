@@ -1,28 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../config/axiosConfig';
-
 import styles from './index.module.scss';
 
+import { isBefore, isAfter, format, parseISO, differenceInDays, addDays } from 'date-fns';
 import { groupBy } from 'lodash';
-import CalendarList from '../../components/CalendarList';
+import CandidateList from '../../components/CandidateList';
 import useFetch from '../../hooks/useFetch';
 
+interface Candidate {
+   id: number;
+   name: string;
+   title: string;
+   interviewStep: string;
+   scheduledTime: string;
+   status: string;
+   image: string;
+}
+
 const Calendar: React.FC = () => {
-   const { data } = useFetch('/Calendar');
+   const { data } = useFetch<Array<Candidate>>('/Calendar');
 
-   const calendarsGroupedByStatus = Object.entries(groupBy(data, 'status'));
+   const candidatesList = data?.map((item) => {
+      const today = new Date();
+      const candidateScheduledDate = parseISO(item.scheduledTime);
 
-   const calendars = calendarsGroupedByStatus.map((calendar) => {
+      if (isBefore(candidateScheduledDate, today)) {
+         return {
+            ...item,
+            status: 'Done',
+         };
+      }
+
+      return item;
+   });
+
+   const candidatesGroupedByStatus = Object.entries(groupBy(candidatesList, 'status'));
+
+   const candidates = candidatesGroupedByStatus.map((calendar) => {
       return {
          title: calendar[0] === 'Scheduled' ? 'UpComing' : calendar[0],
          data: calendar[1],
       };
    });
 
-   console.log(calendars);
    return (
       <main className={styles.calendar}>
-         <CalendarList calendarList={calendars} />
+         <CandidateList candidates={candidates} />
       </main>
    );
 };

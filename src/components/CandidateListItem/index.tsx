@@ -17,7 +17,7 @@ interface Calendar {
 
 interface CalendarItemProps {
    data: {
-      title: string;
+      title?: string;
       data: Array<Calendar>;
    };
 }
@@ -29,11 +29,12 @@ class CalendarItem extends React.Component<CalendarItemProps> {
       };
 
       const { data, title } = this.props.data;
+
       return (
-         <li className={styles.calendar__item}>
-            <header>{title}</header>
+         <li className={styles.candidate__list__item}>
+            {title && <header>{title}</header>}
             <ul>
-               {data.map((item) => (
+               {data?.map((item) => (
                   <li key={item.id}>
                      <div className={styles.candidate__info__container}>
                         <img src={item.image} alt="image of a candidate" />
