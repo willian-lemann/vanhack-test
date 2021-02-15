@@ -1,7 +1,6 @@
 import styles from './index.module.scss';
 
 import CandidateList from '../CandidateList';
-import Loading from 'react-loading';
 
 import useFetch from '../../hooks/useFetch';
 
@@ -10,7 +9,7 @@ interface Candidate {
    name: string;
    title: string;
    interviewStep: string;
-   scheduledTime: Date;
+   scheduledTime: string;
    status: string;
    image: string;
 }
@@ -18,11 +17,11 @@ interface Candidate {
 const Interview = () => {
    const { data } = useFetch<Array<Candidate>>('/Interview/future');
 
-   const candidates = [{ data }];
+   const candidates = data.filter((candidate) => candidate.status !== 'Waiting Confirmation');
 
    return (
       <main className={styles.interview}>
-         <CandidateList candidates={candidates} />
+         <CandidateList candidates={[{ data: candidates }]} />
       </main>
    );
 };

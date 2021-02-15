@@ -23,6 +23,22 @@ interface CandidateListItemProps {
 }
 
 class CandidateListItem extends React.Component<CandidateListItemProps> {
+   state = {
+      isUpComingCandidateExist: false,
+   };
+
+   componentDidMount() {
+      const { data } = this.props.data;
+
+      data.forEach((item) => {
+         if (item.status === 'Scheduled') {
+            this.setState({ isUpComingCandidateExist: true });
+         } else {
+            this.setState({ isUpComingCandidateExist: false });
+         }
+      });
+   }
+
    render() {
       const GetFormattedData = (date: string) => {
          return format(new Date(date), 'E, LLL, ho-paa');
@@ -33,7 +49,7 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
       return (
          <li className={styles.candidate__list__item}>
             {title && <header>{title}</header>}
-            <ul>
+            <ul className={this.state.isUpComingCandidateExist && styles.candidate__upcoming__item}>
                {data?.map((item) => (
                   <li key={item.id}>
                      <div className={styles.candidate__info__container}>
@@ -58,15 +74,21 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
                         </div>
                      )}
 
-                     <button className={styles.interview__link}>
-                        {item.status !== 'Waiting Confirmation' && (
-                           <a className={styles.get__interview__link}>
-                              {item.status === 'Done' ? 'Move to next step' : 'Get interview link'}
-                           </a>
-                        )}
-                     </button>
+                     <div className={styles.candidate__actions__container}>
+                        <button className={styles.interview__link}>
+                           {item.status !== 'Waiting Confirmation' && (
+                              <a className={styles.get__interview__link}>
+                                 {item.status === 'Done' ? 'Move to next step' : 'Get interview link'}
+                              </a>
+                           )}
+                        </button>
 
-                     <FaEllipsisV size={20} color="#58636D" />
+                        {item.status === 'Done' && (
+                           <button className={styles.candidate__actions__reject}>Reject</button>
+                        )}
+                     </div>
+
+                     <FaEllipsisV size={18} color="#58636D" className={styles.candidate__actions__options} />
                   </li>
                ))}
             </ul>

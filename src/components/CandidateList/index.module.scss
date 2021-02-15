@@ -1,7 +1,6 @@
 .candidate__list {
    background-color: #f7f7f7;
    height: 100%;
-   margin: 1px 35px;
 
    .candidate__list__header {
       height: 50px;
@@ -10,14 +9,13 @@
       border-bottom: 1px solid #f2f2f2;
 
       ul {
-         margin: 1px 30px;
+         margin: 1px 60px;
          height: 100%;
-         width: 100%;
          display: flex;
-
-         justify-content: space-between;
          align-items: center;
+
          li {
+            width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
@@ -25,12 +23,18 @@
             color: #4f4f4f;
 
             &:first-child {
-               min-width: 200px;
-               max-width: 200px;
+               min-width: 28%;
+               max-width: 28%;
+            }
+
+            &:nth-child(2) {
+               min-width: 20%;
+               max-width: 20%;
             }
 
             &:nth-child(3) {
-               margin-right: 42%;
+               min-width: 20%;
+               max-width: 20%;
             }
          }
       }

@@ -1,11 +1,9 @@
 import styles from './index.module.scss';
 
-import { isBefore, isAfter, format, parseISO, differenceInDays, addDays } from 'date-fns';
+import { isBefore, parseISO } from 'date-fns';
 import { groupBy } from 'lodash';
 import CandidateList from '../../components/CandidateList';
 import useFetch from '../../hooks/useFetch';
-import { GetStaticProps } from 'next';
-import api from '../../config/axiosConfig';
 
 interface Candidate {
    id: number;
