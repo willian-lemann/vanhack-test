@@ -4,7 +4,7 @@ import useNavigation from '../hooks/useNavigation';
 import Calendar from '../components/Calendar';
 import Interview from '../components/Interview';
 
-const Home: React.FC = () => {
+const Home = () => {
    const {
       navigation: { calendar, interview },
    } = useNavigation();

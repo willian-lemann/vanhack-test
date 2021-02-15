@@ -15,7 +15,7 @@ interface Candidate {
    image: string;
 }
 
-const Interview: React.FC = () => {
+const Interview = () => {
    const { data } = useFetch<Array<Candidate>>('/Interview/future');
 
    const candidates = [{ data }];

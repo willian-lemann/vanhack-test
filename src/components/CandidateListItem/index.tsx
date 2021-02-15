@@ -5,26 +5,26 @@ import styles from './index.module.scss';
 
 import { FaEllipsisV } from 'react-icons/fa';
 
-interface Calendar {
+interface Candidate {
    id: number;
    name: string;
    title: string;
    interviewStep: string;
-   scheduledTime: Date;
+   scheduledTime: string;
    status: string;
    image: string;
 }
 
-interface CalendarItemProps {
+interface CandidateListItemProps {
    data: {
       title?: string;
-      data: Array<Calendar>;
+      data: Array<Candidate>;
    };
 }
 
-class CalendarItem extends React.Component<CalendarItemProps> {
+class CandidateListItem extends React.Component<CandidateListItemProps> {
    render() {
-      const GetFormattedData = (date: Date) => {
+      const GetFormattedData = (date: string) => {
          return format(new Date(date), 'E, LLL, ho-paa');
       };
 
@@ -37,7 +37,7 @@ class CalendarItem extends React.Component<CalendarItemProps> {
                {data?.map((item) => (
                   <li key={item.id}>
                      <div className={styles.candidate__info__container}>
-                        <img src={item.image} alt="image of a candidate" />
+                        <img src={item.image} alt="profile image of a candidate" />
                         <div className={styles.candidate__info__content}>
                            <span>{item.name}</span>
                            <span>{item.title}</span>
@@ -58,11 +58,13 @@ class CalendarItem extends React.Component<CalendarItemProps> {
                         </div>
                      )}
 
-                     <div className={styles.interview__link}>
+                     <button className={styles.interview__link}>
                         {item.status !== 'Waiting Confirmation' && (
-                           <a className={styles.get__interview__link}>Get interview link</a>
+                           <a className={styles.get__interview__link}>
+                              {item.status === 'Done' ? 'Move to next step' : 'Get interview link'}
+                           </a>
                         )}
-                     </div>
+                     </button>
 
                      <FaEllipsisV size={20} color="#58636D" />
                   </li>
@@ -73,4 +75,4 @@ class CalendarItem extends React.Component<CalendarItemProps> {
    }
 }
 
-export default CalendarItem;
+export default CandidateListItem;
