@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import styles from './index.module.scss';
 
 import { FaEllipsisV } from 'react-icons/fa';
+import { Popover } from 'antd';
 
 interface Candidate {
    id: number;
@@ -25,7 +26,22 @@ interface CandidateListItemProps {
 class CandidateListItem extends React.Component<CandidateListItemProps> {
    state = {
       isUpComingCandidateExist: false,
+      selected: {
+         id: 0,
+         status: '',
+         isPopOverVisible: false,
+      },
    };
+
+   HandleOpenPopOver(status: string, id: number) {
+      this.setState({
+         selected: {
+            id,
+            status,
+            isPopOverVisible: !this.state.selected.isPopOverVisible,
+         },
+      });
+   }
 
    componentDidMount() {
       const { data } = this.props.data;
@@ -38,6 +54,30 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
          }
       });
    }
+
+   PopoverContent = () => {
+      return (
+         <div className={styles.candidate__actions__popover}>
+            <section>
+               <span>
+                  {this.state.selected['status'] === 'Waiting Confirmation' ? 'Send the request again' : 'Re-schedule'}
+               </span>
+            </section>
+            <section>
+               <span> Cancel request </span>
+            </section>
+            <section>
+               <span> set as interview done </span>
+            </section>
+            <section>
+               <span> View calendar </span>
+            </section>
+            <section>
+               <span> Report a problem </span>
+            </section>
+         </div>
+      );
+   };
 
    render() {
       const GetFormattedData = (date: string) => {
@@ -88,7 +128,14 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
                         )}
                      </div>
 
-                     <FaEllipsisV size={18} color="#58636D" className={styles.candidate__actions__options} />
+                     <Popover placement="rightTop" trigger="click" content={this.PopoverContent}>
+                        <FaEllipsisV
+                           size={18}
+                           color="#58636D"
+                           className={styles.candidate__actions__options}
+                           onClick={() => this.HandleOpenPopOver(item.status, item.id)}
+                        />
+                     </Popover>
                   </li>
                ))}
             </ul>

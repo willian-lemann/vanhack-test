@@ -14,10 +14,10 @@ interface Candidate {
    image: string;
 }
 
-const Interview = () => {
+const Interview: React.FC = () => {
    const { data } = useFetch<Array<Candidate>>('/Interview/future');
 
-   const candidates = data.filter((candidate) => candidate.status !== 'Waiting Confirmation');
+   const candidates = data?.filter((candidate) => candidate.status !== 'Waiting Confirmation');
 
    return (
       <main className={styles.interview}>
