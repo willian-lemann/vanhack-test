@@ -6,8 +6,7 @@ import { format } from 'date-fns';
 import styles from './index.module.scss';
 
 import { FaEllipsisV } from 'react-icons/fa';
-import { Popover } from 'antd';
-import useNavigation from '../../hooks/useNavigation';
+import { Popover, message } from 'antd';
 
 interface Candidate {
    id: number;
@@ -48,17 +47,17 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
 
    async HandleInterviewLink(candidateId: number) {
       const response = await api.get(`/Calendar/interviewlink/${candidateId}`);
-      console.log(response.data);
+      message.success(response.data);
    }
 
    async HandleMoveNextStep(candidateId: number) {
       const response = await api.post(`/Calendar/movenextstep/${candidateId}`);
-      console.log(response.data);
+      message.success(response.data);
    }
 
    async HandleReject(candidateId: number) {
       const response = await api.post(`/Calendar/reject/${candidateId}`);
-      console.log(response.data);
+      message.success(response.data);
    }
 
    async HandleCandidateOption(status: string, candidateId: number) {
