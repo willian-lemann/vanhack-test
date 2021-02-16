@@ -10,6 +10,6 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. or go to  to see the result in live production.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. or go to https://vanhack-test-one.vercel.app/  to see the result in live production.
 
 
