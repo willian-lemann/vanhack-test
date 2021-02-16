@@ -1,4 +1,6 @@
 import React from 'react';
+import api from '../../config/axiosConfig';
+
 import { format } from 'date-fns';
 
 import styles from './index.module.scss';
@@ -41,6 +43,29 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
             isPopOverVisible: !this.state.selected.isPopOverVisible,
          },
       });
+   }
+
+   async HandleInterviewLink(candidateId: number) {
+      const response = await api.get(`/Calendar/interviewlink/${candidateId}`);
+      console.log(response.data);
+   }
+
+   async HandleMoveNextStep(candidateId: number) {
+      const response = await api.post(`/Calendar/movenextstep/${candidateId}`);
+      console.log(response.data);
+   }
+
+   async HandleReject(candidateId: number) {
+      const response = await api.post(`/Calendar/movenextstep/${candidateId}`);
+      console.log(response.data);
+   }
+
+   async HandleCandidateOption(status: string, candidateId: number) {
+      if (status === 'Done') {
+         this.HandleMoveNextStep(candidateId);
+      } else {
+         this.HandleInterviewLink(candidateId);
+      }
    }
 
    componentDidMount() {
@@ -115,7 +140,10 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
                      )}
 
                      <div className={styles.candidate__actions__container}>
-                        <button className={styles.interview__link}>
+                        <button
+                           className={styles.interview__link}
+                           onClick={() => this.HandleCandidateOption(item.status, item.id)}
+                        >
                            {item.status !== 'Waiting Confirmation' && (
                               <a className={styles.get__interview__link}>
                                  {item.status === 'Done' ? 'Move to next step' : 'Get interview link'}
