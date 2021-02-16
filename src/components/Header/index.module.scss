@@ -14,9 +14,9 @@
       justify-content: space-between;
       align-items: center;
 
-      .header__title__container { 
+      .header__title__container {
          height: 100%;
-         width: 480px;
+         width: 485px;
          margin-left: 44px;
          display: flex;
          justify-content: space-between;
@@ -25,6 +25,7 @@
          span {
             font-size: 20px;
             font-weight: 700;
+            color: #4f4f4f;
          }
       }
 
@@ -149,7 +150,7 @@
          ul {
             height: 100px;
             width: 100%;
-            display: flex; 
+            display: flex;
             flex-wrap: wrap;
 
             li {

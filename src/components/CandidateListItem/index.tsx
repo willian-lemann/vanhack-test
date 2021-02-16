@@ -7,6 +7,7 @@ import styles from './index.module.scss';
 
 import { FaEllipsisV } from 'react-icons/fa';
 import { Popover } from 'antd';
+import useNavigation from '../../hooks/useNavigation';
 
 interface Candidate {
    id: number;
@@ -28,7 +29,7 @@ interface CandidateListItemProps {
 class CandidateListItem extends React.Component<CandidateListItemProps> {
    state = {
       isUpComingCandidateExist: false,
-      selected: {
+      popoverSelect: {
          id: 0,
          status: '',
          isPopOverVisible: false,
@@ -37,10 +38,10 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
 
    HandleOpenPopOver(status: string, id: number) {
       this.setState({
-         selected: {
+         popoverSelect: {
             id,
             status,
-            isPopOverVisible: !this.state.selected.isPopOverVisible,
+            isPopOverVisible: !this.state.popoverSelect.isPopOverVisible,
          },
       });
    }
@@ -56,7 +57,7 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
    }
 
    async HandleReject(candidateId: number) {
-      const response = await api.post(`/Calendar/movenextstep/${candidateId}`);
+      const response = await api.post(`/Calendar/reject/${candidateId}`);
       console.log(response.data);
    }
 
@@ -70,8 +71,10 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
 
    componentDidMount() {
       const { data } = this.props.data;
+      this.setState({ isUpComingCandidateExist: false });
 
-      data.forEach((item) => {
+      data?.forEach((item) => {
+         console.log(item.status);
          if (item.status === 'Scheduled') {
             this.setState({ isUpComingCandidateExist: true });
          } else {
@@ -85,7 +88,9 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
          <div className={styles.candidate__actions__popover}>
             <section>
                <span>
-                  {this.state.selected['status'] === 'Waiting Confirmation' ? 'Send the request again' : 'Re-schedule'}
+                  {this.state.popoverSelect['status'] === 'Waiting Confirmation'
+                     ? 'Send the request again'
+                     : 'Re-schedule'}
                </span>
             </section>
             <section>
@@ -114,7 +119,11 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
       return (
          <li className={styles.candidate__list__item}>
             {title && <header>{title}</header>}
-            <ul className={this.state.isUpComingCandidateExist && styles.candidate__upcoming__item}>
+            <ul
+               className={
+                  this.state.isUpComingCandidateExist && title === 'UpComing' && styles.candidate__upcoming__item
+               }
+            >
                {data?.map((item) => (
                   <li key={item.id}>
                      <div className={styles.candidate__info__container}>
@@ -152,7 +161,12 @@ class CandidateListItem extends React.Component<CandidateListItemProps> {
                         </button>
 
                         {item.status === 'Done' && (
-                           <button className={styles.candidate__actions__reject}>Reject</button>
+                           <button
+                              className={styles.candidate__actions__reject}
+                              onClick={() => this.HandleReject(item.id)}
+                           >
+                              Reject
+                           </button>
                         )}
                      </div>
 

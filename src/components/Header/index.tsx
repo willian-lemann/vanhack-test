@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 
 import styles from './index.module.scss';
 
-import { FaInfoCircle, FaRegBuilding, FaUser, FaDollarSign, FaCode, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaRegBuilding, FaUser, FaDollarSign, FaCode, FaMapMarkerAlt } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { Popover } from 'antd';
 import useNavigation from '../../hooks/useNavigation';
 
@@ -49,13 +50,14 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
          <section className={styles.header__title__section}>
             <div className={styles.header__title__container}>
                <span>{title}</span>
+
                <Popover
                   placement="rightTop"
                   trigger="click"
                   overlayClassName={styles.header__popover__overlay}
                   content={PopoverContent}
                >
-                  <FaInfoCircle size={20} />
+                  <AiOutlineExclamationCircle size={20} />
                </Popover>
             </div>
 
